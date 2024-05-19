@@ -128,3 +128,8 @@ dist
 .yarn/build-state.yml
 .yarn/install-state.gz
 .pnp.*
+
+# my project
+**/__*
+.vscode/VC.DB
+.vscode/pinned-files.json
