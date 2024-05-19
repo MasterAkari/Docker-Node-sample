@@ -1,0 +1,98 @@
+{
+    // See https://go.microsoft.com/fwlink/?LinkId=733558
+    // for the documentation about the tasks.json format
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "setup : image: pull",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/image_setup.cmd"
+            },
+            "linux": {
+                "command": "echo Not implemented"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "setup : container_create",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/container_create.cmd"
+            },
+            "linux": {
+                "command": "echo Not implemented"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "setup : container_remove",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/container_remove.cmd"
+            },
+            "linux": {
+                "command": "echo Not implemented"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "setup : network : remove",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/network_remove.cmd"
+            },
+            "linux": {
+                "command": "echo Not implemented"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "setup : network : create",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/network_create.cmd"
+            },
+            "linux": {
+                "command": "echo Not implemented"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "container_stop",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/container_stop.cmd"
+            },
+            "linux": {
+                "command": "echo Not implemented"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "container_start",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/container_start.cmd"
+            },
+            "linux": {
+                "command": "echo Not implemented"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        }
+    ]
+}
