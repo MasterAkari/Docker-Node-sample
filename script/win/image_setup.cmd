@@ -13,8 +13,9 @@ echo ==================================================
 
 for /f "usebackq" %%B IN (`docker image ls -q %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER%`) do set IMAGE_ID=%%B
 if not "%IMAGE_ID%" == "" (
-    echo "Remove existing image"
     docker rmi %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER%
+    echo //////////////////////////////////////////////////
+    echo Remove existing image
 )
 
 docker build ^
@@ -26,17 +27,9 @@ docker build ^
     ./
 
 echo //////////////////////////////////////////////////
-echo docker volume ls
-echo ------------------------------------------------
 docker volume ls
-
-echo //////////////////////////////////////////////////
-echo docker network ls
 echo ------------------------------------------------
 docker network ls
-
-echo //////////////////////////////////////////////////
-echo docker images
 echo ------------------------------------------------
 docker images
 echo //////////////////////////////////////////////////

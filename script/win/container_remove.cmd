@@ -13,9 +13,9 @@ docker ps -a --format "{{.Names}}" --filter "name=%DOCKER_CONTAINER_NAME%" | fin
 if %ERRORLEVEL% EQU 0 (
     docker stop %DOCKER_CONTAINER_NAME% > nul
     docker rm %DOCKER_CONTAINER_NAME% > nul
-    echo "Remove existing container : %DOCKER_CONTAINER_NAME%"
+    echo Remove existing container : %DOCKER_CONTAINER_NAME%
 ) else (
-    echo "No container found"
+    echo No container found
 )
 
 echo //////////////////////////////////////////////////
