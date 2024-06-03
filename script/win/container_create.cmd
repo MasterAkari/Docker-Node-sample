@@ -17,12 +17,10 @@ docker ps -a --format "{{.Names}}" --filter "name=%DOCKER_CONTAINER_NAME%" | fin
 if %ERRORLEVEL% EQU 0 (
     docker stop %DOCKER_CONTAINER_NAME% > nul
     docker rm %DOCKER_CONTAINER_NAME% > nul
-    echo Remove existing container : %DOCKER_CONTAINER_NAME%
+    echo [INFO] Remove existing container : %DOCKER_CONTAINER_NAME%
+    echo //////////////////////////////////////////////////
 )
 
-echo //////////////////////////////////////////////////
-echo docker run
-echo ------------------------------------------------
 docker run ^
     -dit ^
     --name %DOCKER_CONTAINER_NAME% ^
@@ -33,10 +31,9 @@ docker run ^
     -v %~dp0..\..\%SOURCE_DIR%:/home/%USER_NAME%/webserver/public ^
     --workdir /home/%USER_NAME%/webserver ^
     %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER% ^
-    /bin/bash
+    /bin/bash > nul
 
-echo //////////////////////////////////////////////////
 docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
-echo ------------------------------------------------
+echo --------------------------------------------------
 echo [DOCKER LOGS]
 docker logs %DOCKER_CONTAINER_NAME%

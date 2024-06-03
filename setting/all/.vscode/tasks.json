@@ -4,65 +4,65 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "setup : image: pull",
-            "type": "shell",
-            "windows": {
-                "command": "${workspaceFolder}/script/win/image_setup.cmd"
-            },
-            "linux": {
-                "command": "echo Not implemented"
-            },
-            "osx": {
-                "command": "echo Not implemented"
-            },
-        },
-        {
-            "label": "setup : container_create",
-            "type": "shell",
-            "windows": {
-                "command": "${workspaceFolder}/script/win/container_create.cmd"
-            },
-            "linux": {
-                "command": "echo Not implemented"
-            },
-            "osx": {
-                "command": "echo Not implemented"
-            },
-        },
-        {
-            "label": "setup : container_remove",
-            "type": "shell",
-            "windows": {
-                "command": "${workspaceFolder}/script/win/container_remove.cmd"
-            },
-            "linux": {
-                "command": "echo Not implemented"
-            },
-            "osx": {
-                "command": "echo Not implemented"
-            },
-        },
-        {
-            "label": "setup : network : remove",
-            "type": "shell",
-            "windows": {
-                "command": "${workspaceFolder}/script/win/network_remove.cmd"
-            },
-            "linux": {
-                "command": "echo Not implemented"
-            },
-            "osx": {
-                "command": "echo Not implemented"
-            },
-        },
-        {
-            "label": "setup : network : create",
+            "label": "setup : 00_network : create",
             "type": "shell",
             "windows": {
                 "command": "${workspaceFolder}/script/win/network_create.cmd"
             },
             "linux": {
+                "command": "${workspaceFolder}/script/linux/network_create.sh"
+            },
+            "osx": {
                 "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "setup : 00_network : remove",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/network_remove.cmd"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/script/linux/network_remove.sh"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "setup : 01_image : pull",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/image_setup.cmd"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/script/linux/image_setup.sh"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "setup : 02_container : create",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/container_create.cmd"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/script/linux/container_create.sh"
+            },
+            "osx": {
+                "command": "echo Not implemented"
+            },
+        },
+        {
+            "label": "setup : 02_container : remove",
+            "type": "shell",
+            "windows": {
+                "command": "${workspaceFolder}/script/win/container_remove.cmd"
+            },
+            "linux": {
+                "command": "${workspaceFolder}/script/linux/container_remove.sh"
             },
             "osx": {
                 "command": "echo Not implemented"
@@ -75,7 +75,7 @@
                 "command": "${workspaceFolder}/script/win/container_stop.cmd"
             },
             "linux": {
-                "command": "echo Not implemented"
+                "command": "${workspaceFolder}/script/linux/container_stop.sh"
             },
             "osx": {
                 "command": "echo Not implemented"
@@ -88,7 +88,7 @@
                 "command": "${workspaceFolder}/script/win/container_start.cmd"
             },
             "linux": {
-                "command": "echo Not implemented"
+                "command": "${workspaceFolder}/script/linux/container_start.sh"
             },
             "osx": {
                 "command": "echo Not implemented"

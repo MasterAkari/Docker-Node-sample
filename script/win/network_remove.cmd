@@ -1,6 +1,6 @@
 @echo off
 echo ==================================================
-echo Setup docker image
+echo Remove network
 echo ==================================================
 FOR /F "usebackq delims== tokens=1,2" %%a IN ("%~dp0..\config.ini") DO SET %%a=%%b
 echo   Docker netowr:
@@ -12,11 +12,9 @@ docker network ls --format "{{.Name}}" --filter "name=%DOCKER_NETWORK_NAME%" | f
 
 if %ERRORLEVEL% EQU 0 (
     docker network rm %DOCKER_NETWORK_NAME% > nul
-    echo Remove existing network : %DOCKER_NETWORK_NAME%
+    echo [INFO] Remove existing network : %DOCKER_NETWORK_NAME%
 )
 
 echo //////////////////////////////////////////////////
-echo docker network ls
-echo ------------------------------------------------
 docker network ls
-echo //////////////////////////////////////////////////
+echo --------------------------------------------------

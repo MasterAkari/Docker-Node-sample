@@ -2,11 +2,37 @@
 
 DockerでNodeサーバーを立ち上げるためのサンプル
 
-!!! CAUTION
-    * 設定スクリプトは、Windowsのみサポートしています。
-
-
 ## 使い方
+
+### Linux
+
+1. Docker をインストールしてください。
+1. 下記のコマンドを実行してください。
+
+```bash
+cd ${workspaceFolder}/script/linux
+
+# イメージを作成します。
+./image_setup.sh
+
+# コンテナの作成
+./container_create.sh
+```
+
+```bash
+# その他
+
+## コンテナにログインします。
+./container_start.sh
+./container_stop.sh
+
+## ネットワークを作成/削除します。
+./network_create.sh
+./network_remove.sh
+
+## コンテナを削除します。
+./container_remove.sh
+```
 
 ### Windows
 
