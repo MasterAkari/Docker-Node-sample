@@ -10,7 +10,10 @@ echo       port         : %SERVER_PORT%
 echo       user name    : %USER_NAME%
 echo   Open port        : %OPEN_PORT%
 echo ==================================================
-SET NETWORT_OPTION=""
+SET NETWORT_OPTION=
+if not "%DOCKER_NETWORK_NAME%" == "" (
+    SET NETWORT_OPTION=--network %DOCKER_NETWORK_NAME%
+)
 
 docker ps -a --format "{{.Names}}" --filter "name=%DOCKER_CONTAINER_NAME%" | findstr /r /c:"%DOCKER_CONTAINER_NAME%" > nul
 
@@ -26,8 +29,7 @@ docker run ^
     --name %DOCKER_CONTAINER_NAME% ^
     --hostname %DOCKER_CONTAINER_NAME% ^
     --publish %OPEN_PORT%:%SERVER_PORT% ^
-    --network bridge ^
-    --user %USER_NAME% ^
+    %NETWORT_OPTION% --user %USER_NAME% ^
     -v %~dp0..\..\%SOURCE_DIR%:/home/%USER_NAME%/webserver/public ^
     --workdir /home/%USER_NAME%/webserver ^
     %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER% ^
