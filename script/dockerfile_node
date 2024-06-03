@@ -19,7 +19,6 @@ RUN apt install -y vim
 
 ##=============================================================
 ENV USER ${USER_NAME}
-ENV NODE_PORT ${SERVER_PORT}
 ##=============================================================
 
 RUN useradd --create-home --home-dir /home/${USER_NAME} \
@@ -39,5 +38,4 @@ RUN npm install
 
 ##=============================================================
 EXPOSE ${SERVER_PORT}
-ENTRYPOINT ["node", "server.js"]
-# node /home/common/webserver/server.js --port=8000
+ENTRYPOINT ["node", "server.js", "--port=8000"]
