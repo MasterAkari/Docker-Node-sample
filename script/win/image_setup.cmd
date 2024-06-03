@@ -11,15 +11,25 @@ echo       port         : %SERVER_PORT%
 echo       user name    : %USER_NAME%
 echo ==================================================
 
+docker ps -a --format "{{.Names}}" --filter "name=%DOCKER_CONTAINER_NAME%" | findstr /r /c:"%DOCKER_CONTAINER_NAME%" > nul
+
+if %ERRORLEVEL% EQU 0 (
+    docker stop %DOCKER_CONTAINER_NAME% > nul
+    docker rm %DOCKER_CONTAINER_NAME% > nul
+    echo * Remove existing container : %DOCKER_CONTAINER_NAME%
+    echo //////////////////////////////////////////////////
+)
+
 for /f "usebackq" %%B IN (`docker image ls -q %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER%`) do set IMAGE_ID=%%B
 if not "%IMAGE_ID%" == "" (
-    docker rmi %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER%
+    docker rmi %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER% > nul
+    echo * Remove existing image : %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER%
     echo //////////////////////////////////////////////////
-    echo Remove existing image
 )
 
 docker build ^
     --build-arg USER_NAME=%USER_NAME% ^
+    --build-arg GROUP_NAME=%GROUP_NAME% ^
     --build-arg SERVER_PORT=%SERVER_PORT% ^
     --no-cache ^
     -t %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER% ^

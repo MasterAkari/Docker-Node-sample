@@ -1,0 +1,43 @@
+# https://hub.docker.com/_/node/tags
+#FROM node:latest
+FROM node:lts-bullseye-slim
+LABEL maintainer="Akari<masiro.to.akari@gmail.com>"
+SHELL ["/bin/bash", "-c"]
+
+##=============================================================
+ARG USER_NAME=common
+ARG GROUP_NAME=root
+ARG SERVER_PORT=8000
+ARG SRC_DIR=../src/node-script/*
+ARG DST_DIR=/home/${USER_NAME}/webserver
+
+##=============================================================
+RUN apt update -q
+RUN apt install -y sudo
+RUN apt install -y procps iputils-ping net-tools dnsutils
+RUN apt install -y vim
+
+##=============================================================
+ENV USER ${USER_NAME}
+ENV NODE_PORT ${SERVER_PORT}
+##=============================================================
+
+RUN useradd --create-home --home-dir /home/${USER_NAME} \
+    --shell /bin/bash --user-group --groups adm,sudo,root ${USER_NAME} && \
+    echo ${USER_NAME}:${GROUP_NAME} | chpasswd && \
+    echo "${USER_NAME} ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+
+##=============================================================
+USER ${USER_NAME}
+RUN sed -i -e "s/#alias l/alias l/g" /home/${USER_NAME}/.bashrc
+RUN sed -i -e "s/# alias l/alias l/g" /home/${USER_NAME}/.bashrc
+
+##=============================================================
+WORKDIR /home/${USER_NAME}/webserver
+COPY --chmod=755 --chown=${USER_NAME}:${GROUP_NAME} ${SRC_DIR} ${DST_DIR}
+RUN npm install
+
+##=============================================================
+EXPOSE ${SERVER_PORT}
+ENTRYPOINT ["node", "server.js"]
+# node /home/common/webserver/server.js --port=8000

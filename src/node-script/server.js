@@ -1,5 +1,12 @@
 var http = require("http");
 var fs = require('fs');
+var port_number = 8000;
+
+for (var i = 0; i < process.argv.length; i++) {
+    if (process.argv[i].indexOf('--port=') === 0) {
+        port_number = process.argv[i].substring('--port='.length);
+    }
+}
 
 function getType(_url) {
     var types = {
@@ -36,7 +43,7 @@ var server = http.createServer(function (req, res) {
     }
 });
 
-var port = process.env.PORT || 8000;
+var port = process.env.PORT || port_number;
 server.listen(port, function () {
     console.log("To view your app, open this link in your browser: http://localhost:" + port);
 });

@@ -31,12 +31,12 @@ docker run ^
     --network bridge ^
     --user %USER_NAME% ^
     -v %~dp0..\..\%SOURCE_DIR%:/home/%USER_NAME%/webserver/public ^
-    -w /home/%USER_NAME%/webserver ^
-    %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER%
+    --workdir /home/%USER_NAME%/webserver ^
+    %DOCKER_IMAGE_NAME%:%DOCKER_IMAGE_VER% ^
+    /bin/bash
 
 echo //////////////////////////////////////////////////
-echo docker ps -a
-echo ------------------------------------------------
-docker ps -a
-echo //////////////////////////////////////////////////
 docker ps -a --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"
+echo ------------------------------------------------
+echo [DOCKER LOGS]
+docker logs %DOCKER_CONTAINER_NAME%

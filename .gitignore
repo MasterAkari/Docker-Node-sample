@@ -131,5 +131,5 @@ dist
 
 # my project
 **/__*
-.vscode/VC.DB
-.vscode/pinned-files.json
+**/.vscode/VC.DB
+**/.vscode/pinned-files.json
