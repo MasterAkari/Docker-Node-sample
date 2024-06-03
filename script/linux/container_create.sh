@@ -1,6 +1,6 @@
 #!/bin/bash
 echo ==================================================
-echo Create a container
+echo "[Create container]"
 echo ==================================================
 CURRENT_DIR=$(dirname $0)
 INI_FILE=$(readlink -f ${CURRENT_DIR}/../config.ini)

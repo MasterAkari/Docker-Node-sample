@@ -1,6 +1,6 @@
 #!/bin/bash
 echo ==================================================
-echo Setup docker image
+echo "[Setup docker image]"
 echo ==================================================
 CURRENT_DIR=$(dirname $0)
 INI_FILE=$(readlink -f ${CURRENT_DIR}/../config.ini)

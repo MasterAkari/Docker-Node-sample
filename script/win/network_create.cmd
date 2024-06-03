@@ -1,6 +1,6 @@
 @echo off
 echo ==================================================
-echo Create network
+echo [Create network]
 echo ==================================================
 FOR /F "usebackq delims== tokens=1,2" %%a IN ("%~dp0..\config.ini") DO SET %%a=%%b
 echo   Docker netowr:

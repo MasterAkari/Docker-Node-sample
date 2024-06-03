@@ -1,6 +1,6 @@
 #!/bin/bash
 echo ==================================================
-echo Stop container
+echo "[Stop container]"
 echo ==================================================
 INI_FILE=$(readlink -f $(dirname $0)/../config.ini)
 source <(sed -n -E 's/^\s*(\S+)\s*=\s*(.+)$/\1=\2/p' <"${INI_FILE}")

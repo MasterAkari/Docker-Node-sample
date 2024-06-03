@@ -1,6 +1,6 @@
 @echo off
 echo ==================================================
-echo Remove network
+echo [Remove network]
 echo ==================================================
 FOR /F "usebackq delims== tokens=1,2" %%a IN ("%~dp0..\config.ini") DO SET %%a=%%b
 echo   Docker netowr:
