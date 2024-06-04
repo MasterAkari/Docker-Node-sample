@@ -31,8 +31,8 @@ docker run \
     -dit \
     --name ${DOCKER_CONTAINER_NAME} \
     --hostname ${DOCKER_CONTAINER_NAME} \
-    --publish ${OPEN_PORT}:${SERVER_PORT} \
-    ${NETWORT_OPTION} --user ${USER_NAME} \
+    --publish ${OPEN_PORT}:${SERVER_PORT} ${NETWORT_OPTION} \
+    --user ${USER_NAME} \
     -v $(readlink -f ${CURRENT_DIR}/../../${SOURCE_DIR}):/home/${USER_NAME}/webserver/public \
     --workdir /home/${USER_NAME}/webserver \
     ${DOCKER_IMAGE_NAME}:${DOCKER_IMAGE_VER} \

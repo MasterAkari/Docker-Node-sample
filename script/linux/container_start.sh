@@ -11,12 +11,17 @@ echo "  Docker container : ${DOCKER_CONTAINER_NAME}"
 echo "      port         : ${SERVER_PORT}"
 echo "      user name    : ${USER_NAME}"
 echo ==================================================
+ret=1
 
-docker ps -a --format "{{.Names}}" --filter "name=${DOCKER_CONTAINER_NAME}" | findstr /r /c:"${DOCKER_CONTAINER_NAME}" > /dev/null
-ret=$?
-if [ 0 -eq ${ret} ]; then
-    docker start ${DOCKER_CONTAINER_NAME} > /dev/null
-    docker exec -it ${DOCKER_CONTAINER_NAME} /bin/bash
-else
-    echo [ERROR] No container found
+FILTER_LIST=($(docker ps -a --format "{{.Names}}" --filter "name=${DOCKER_CONTAINER_NAME}"))
+for LINE in ${FILTER_LIST}; do
+    if [ "${LINE}" == "${DOCKER_CONTAINER_NAME}" ]; then
+        docker start ${DOCKER_CONTAINER_NAME} > /dev/null
+        docker exec -it ${DOCKER_CONTAINER_NAME} /bin/bash
+        ret=0
+    fi
+done
+
+if [ $ret -eq 1 ]; then
+    echo [ERROR] Not found container : ${DOCKER_CONTAINER_NAME}
 fi

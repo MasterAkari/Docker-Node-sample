@@ -12,15 +12,14 @@ echo "      port         : ${SERVER_PORT}"
 echo "      user name    : ${USER_NAME}"
 echo ==================================================
 
-docker ps --format "{{.Names}}" --filter "name=${DOCKER_CONTAINER_NAME}" | findstr /r /c:"${DOCKER_CONTAINER_NAME}" > /dev/null
-ret=$?
-if [ 0 -eq ${ret} ]; then
-    docker stop ${DOCKER_CONTAINER_NAME} > /dev/null
-    echo Stop existing container : ${DOCKER_CONTAINER_NAME}
-    echo //////////////////////////////////////////////////
-    docker ps -a --format "table {{.Names}}\t{{.Status}}"
-    echo //////////////////////////////////////////////////
-else
-    echo The container is not running : ${DOCKER_CONTAINER_NAME}
-fi
+FILTER_LIST=($(docker ps -a --format "{{.Names}}" --filter "name=${DOCKER_CONTAINER_NAME}"))
+for LINE in ${FILTER_LIST}; do
+    if [ "${LINE}" == "${DOCKER_CONTAINER_NAME}" ]; then
+        docker stop ${DOCKER_CONTAINER_NAME} > /dev/null
+        echo Stop existing container : ${DOCKER_CONTAINER_NAME}
+        echo //////////////////////////////////////////////////
+    fi
+done
 
+docker ps -a --format "table {{.Names}}\t{{.Status}}"
+echo //////////////////////////////////////////////////

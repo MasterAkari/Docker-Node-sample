@@ -17,9 +17,7 @@ if %ERRORLEVEL% EQU 0 (
     docker stop %DOCKER_CONTAINER_NAME% > nul
     echo Stop existing container : %DOCKER_CONTAINER_NAME%
     echo //////////////////////////////////////////////////
-    docker ps -a --format "table {{.Names}}\t{{.Status}}"
-    echo //////////////////////////////////////////////////
-) else (
-    echo The container is not running : %DOCKER_CONTAINER_NAME%
 )
 
+docker ps -a --format "table {{.Names}}\t{{.Status}}"
+echo //////////////////////////////////////////////////
