@@ -12,7 +12,7 @@ echo "      port         : ${SERVER_PORT}"
 echo "      user name    : ${USER_NAME}"
 echo ==================================================
 
-FILTER_LIST=($(docker ps -a --format "{{.Names}}" --filter "name=${DOCKER_CONTAINER_NAME}"))
+FILTER_LIST=($(docker ps --format "{{.Names}}" --filter "name=${DOCKER_CONTAINER_NAME}"))
 for LINE in ${FILTER_LIST}; do
     if [ "${LINE}" == "${DOCKER_CONTAINER_NAME}" ]; then
         docker stop ${DOCKER_CONTAINER_NAME} > /dev/null

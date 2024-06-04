@@ -11,6 +11,16 @@ echo       port         : %SERVER_PORT%
 echo       user name    : %USER_NAME%
 echo ==================================================
 
+docker ps --format "{{.Names}}" --filter "name=%DOCKER_CONTAINER_NAME%" | findstr /r /c:"%DOCKER_CONTAINER_NAME%" > nul
+
+if %ERRORLEVEL% EQU 0 (
+    docker stop %DOCKER_CONTAINER_NAME% > nul
+    echo Stop existing container : %DOCKER_CONTAINER_NAME%
+    echo //////////////////////////////////////////////////
+)
+docker ps -a --format "table {{.Names}}\t{{.Status}}"
+echo //////////////////////////////////////////////////
+
 docker ps -a --format "{{.Names}}" --filter "name=%DOCKER_CONTAINER_NAME%" | findstr /r /c:"%DOCKER_CONTAINER_NAME%" > nul
 
 if %ERRORLEVEL% EQU 0 (

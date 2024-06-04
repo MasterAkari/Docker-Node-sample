@@ -13,6 +13,18 @@ echo "      user name    : ${USER_NAME}"
 echo ==================================================
 ret=1
 
+FILTER_LIST=($(docker ps --format "{{.Names}}" --filter "name=${DOCKER_CONTAINER_NAME}"))
+for LINE in ${FILTER_LIST}; do
+    if [ "${LINE}" == "${DOCKER_CONTAINER_NAME}" ]; then
+        docker stop ${DOCKER_CONTAINER_NAME} > /dev/null
+        echo Stop existing container : ${DOCKER_CONTAINER_NAME}
+        echo //////////////////////////////////////////////////
+    fi
+done
+
+docker ps -a --format "table {{.Names}}\t{{.Status}}"
+echo //////////////////////////////////////////////////
+
 FILTER_LIST=($(docker ps -a --format "{{.Names}}" --filter "name=${DOCKER_CONTAINER_NAME}"))
 for LINE in ${FILTER_LIST}; do
     if [ "${LINE}" == "${DOCKER_CONTAINER_NAME}" ]; then
